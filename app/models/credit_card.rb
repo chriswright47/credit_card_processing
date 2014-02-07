@@ -49,4 +49,5 @@ class CreditCard
 		end
 		dollar_string[1..-1].to_i
 	end
+	
 end

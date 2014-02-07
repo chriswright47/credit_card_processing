@@ -14,9 +14,11 @@ describe ApplicationUserInterface do
 	context "Instance Methods" do
 
 		context "display_valid_commands" do
-			
-			it "should" do
 
+			it "should return return nil after putsing out its string" do
+				YoloClass = Struct.new(:name, :number, :limit)
+				interface = ApplicationUserInterface.new(YoloClass)
+				interface.display_valid_commands.should eq nil
 			end
 		end
 	end

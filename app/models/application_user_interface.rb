@@ -1,5 +1,5 @@
 class ApplicationUserInterface
-	# good public interfaces
+	include Messages
 
 	# We have a reader for credit_card so that we can do Rspec tests
 	attr_reader :credit_card
@@ -10,7 +10,7 @@ class ApplicationUserInterface
 	end
 
 	def display_valid_commands
-
+		welcome_message
 	end
 
 end
