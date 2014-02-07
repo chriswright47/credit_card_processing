@@ -1,0 +1,1 @@
+Took a TDD approach to this, discovering new things along the way. Encryption, decided to not use factory girl because in this situation it wouldent really help that much since I wanted a lot of controll over ... and would have to manually enter the credit card numbers and limits myself anyways
