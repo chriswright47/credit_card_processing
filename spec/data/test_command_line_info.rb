@@ -6,3 +6,5 @@ COMMAND_LINE_PROMPTS = {
 	"not a valid prompt" => {}
 }
 
+TEST_SESSION_INFORMATION = [{:name =>"Andrew", :ballance => 33}, {:name =>"Joe", :ballance => 933}, {:name => "Tyson", :ballance => -400}]
+
