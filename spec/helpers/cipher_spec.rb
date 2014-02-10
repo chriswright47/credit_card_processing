@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Cipher do
+# describe Cipher do
 	
-end
+# end

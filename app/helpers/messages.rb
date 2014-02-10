@@ -33,4 +33,8 @@ module Messages
 
 		end
 	end
+
+	def invalid_user_message(user_name)
+		"User #{user_name} does not exist. You must create a card for them first\n"
+	end
 end

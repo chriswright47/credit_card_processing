@@ -46,10 +46,6 @@ describe ApplicationUserInterface do
 
 			end
 
-			it "should exit the program if someone enters DONE" do
-
-			end
-
 			it "should create a new credit card object if the user's first input word is add" do
 
 			end

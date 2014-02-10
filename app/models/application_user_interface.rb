@@ -23,6 +23,7 @@ class ApplicationUserInterface
 			if command.downcase == "help"
 				display_valid_commands
 			elsif command[0..2].downcase == "add"
+				# unless already_exists()
 				create_new_card(parse(command))
 			elsif command[0..5].downcase == "credit"
 				credit_a_card()
@@ -38,6 +39,19 @@ class ApplicationUserInterface
 
 	private
 
+	def already_exists(user)
+		self.session_information.fetch(user, nil)
+		# If the user already exists then we need to present them with a list of 
+	end
+
+	def crdwq
+
+	end
+
+
+	def create_new_card(card_information)
+		self.session_information << self.credit_card.new(card_information)
+	end
 
 	def display_session_summary
 		puts session_summary_message(self.session_information)
