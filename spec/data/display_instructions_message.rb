@@ -15,3 +15,11 @@ WELCOME_MESSAGE = <<-String
 		 To display these commands again, type HELP
      To exit, type EXIT
      String
+
+ERROR_MESSAGE = <<-String
+		Sorry, but #{command} is not a valid prompt.
+		Please enter a valid command or type HELP to see a list of command options.
+
+		String
+
+		

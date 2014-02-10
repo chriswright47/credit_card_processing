@@ -34,7 +34,8 @@ describe ApplicationUserInterface do
 		context "run" do
 			
 			it "should run until someone types in EXIT" do
-			
+				YoloClass = Struct.new(:name, :number, :limit)
+				interface = ApplicationUserInterface.new(YoloClass)
 			end
 
 			it "should print out the welcome message if the user types in HELP" do
