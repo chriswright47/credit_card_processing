@@ -32,18 +32,23 @@ describe ApplicationUserInterface do
 		end
 
 		context "run" do
-			
-			it "should run until someone types in EXIT" do
+			# This is a tricky method to test since it runs an an infinite loop.
+			# At first I just stubbed out the command_prompt method with the corresponding
+			# Keywords 
+
+
+			it "should print out the welcome message" do
 				YoloClass = Struct.new(:name, :number, :limit)
 				interface = ApplicationUserInterface.new(YoloClass)
+				interface.stub(:run) {WELCOME_MESSAGE}
+				interface.run.should eq WELCOME_MESSAGE
 			end
 
-			it "should print out the welcome message if the user types in HELP" do
-
-			end
-
-			it "should print out all the user's credit card info and ballances if someone enters DONE" do
-
+			it "should print out all the user's credit card info and ballances if someone enters 'done'" do
+				YoloClass = Struct.new(:name, :number, :limit)
+				interface = ApplicationUserInterface.new(YoloClass)
+				interface.stub(:session_information) {[{:name =>"Andrew", :ballance => 33}, {:name =>"Joe", :ballance => 933}]}
+				interface.session_summary_message(interface.session_information).should eq ["Andrew: $33\n", "Joe: $933\n"]
 			end
 
 			it "should create a new credit card object if the user's first input word is add" do

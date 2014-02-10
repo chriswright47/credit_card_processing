@@ -1,3 +1,5 @@
+
+
 class ApplicationUserInterface
 
 	# this module contains all the raw messages to be displayed by the run method
@@ -10,7 +12,7 @@ class ApplicationUserInterface
 	attr_reader :credit_card, :session_information
 
 	def initialize(credit_card)
-		@session_information = Hash.new
+		@session_information = Array.new
 		@credit_card = credit_card
 		raise ArgumentError.new("Must be initialized with a credit card class") unless @credit_card.is_a?(Class)
 	end
@@ -23,19 +25,20 @@ class ApplicationUserInterface
 			if command.downcase == "help"
 				display_valid_commands
 			elsif command[0..2].downcase == "add"
-				# unless already_exists()
 				create_new_card(parse(command))
 			elsif command[0..5].downcase == "credit"
-				credit_a_card()
+				credit_a_card(parse(command))
 			elsif command[0..5].downcase == "charge"
-				charge_a_card()
+				charge_a_card(parse(command))
 			else 
 				display_error_message
 			end
+			break if finished # I had to do this for rspec testing
 		command = command_prompt
 		end
-		display_session_information
+		display_session_summary
 	end
+
 
 	private
 
@@ -43,11 +46,6 @@ class ApplicationUserInterface
 		self.session_information.fetch(user, nil)
 		# If the user already exists then we need to present them with a list of 
 	end
-
-	def crdwq
-
-	end
-
 
 	def create_new_card(card_information)
 		self.session_information << self.credit_card.new(card_information)
@@ -63,6 +61,10 @@ class ApplicationUserInterface
 
 	def display_valid_commands
 		puts welcome_message
+	end
+
+	#See my readme for an explination
+	def finished
 	end
 
 	def command_prompt

@@ -29,9 +29,11 @@ module Messages
 	end
 
 	def session_summary_message(session_hash)
-		session_hash.each_pair do |key, value|
-
+		tmp_array =[]
+		session_hash.each do |element|
+			tmp_array << "#{element.fetch(:name,nil)}: $#{element.fetch(:ballance,"error")}\n"
 		end
+		tmp_array
 	end
 
 	def invalid_user_message(user_name)

@@ -14,7 +14,7 @@ class CreditCard
 		@number = params.fetch(:number,nil)
 		@valid = valid_card?(@number)
 		@limit = format_amount(params.fetch(:limit))
-		@ballance = 0
+		@valid ? @ballance = 0 : @ballance = "error"
 		raise ArgumentError.new("Must be initialized with a name, number and limit") unless correct_params
 		# encrypt all data
 	end

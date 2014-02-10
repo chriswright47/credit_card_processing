@@ -1,3 +1,5 @@
+# Dir["../app/models/*.rb"].each {|file| require_relative file }
+
 require_relative '../app/helpers/luhn10.rb'
 require_relative '../app/helpers/messages.rb'
 require_relative '../app/helpers/runtime_utils.rb'

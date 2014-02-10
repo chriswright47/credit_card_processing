@@ -22,9 +22,14 @@ describe CreditCard do
 			expect { CreditCard.new({:name => nil, :number => 101010101010101, :limit => "$4000"}) }.to raise_error
 		end
 
-		it "should be initialized with a ballance of 0" do 
-			bryson_card = CreditCard.new({:name => "Bryson", :number => 321482246318888, :limit => "$8000"})
+		it "should be initialized with a ballance of 0 if it is a valid card" do 
+			bryson_card = CreditCard.new({:name => "Bryson", :number => 38520000023237, :limit => "$8000"})
 			bryson_card.ballance.should eq 0
+		end
+
+		it "should be initialized with a ballance value of 'error' if it is an invalid card" do 
+			jessica_card = CreditCard.new({:name => "Jessica", :number => 38523200423237, :limit => "$8340"})
+			jessica_card.ballance.should eq 'error'
 		end
 
 		it "should check to see if the card number is a valid number" do
@@ -46,7 +51,7 @@ describe CreditCard do
 				brittnay_card = CreditCard.new({:name => "Brittnay", :number => 321482246318888, :limit => "$8000"})
 				brittnay_card.charge("$134")
 				brittnay_card.charge("$1000")
-				brittnay_card.ballance.should eq 0
+				brittnay_card.ballance.should eq 'error'
 			end
 
 			# As per the initial input assumptions, we can change this easily enough later on if we like
@@ -79,7 +84,7 @@ describe CreditCard do
 				sophie_card = CreditCard.new({:name => "Sophie", :number => 4988457458457043, :limit => "$87943"})
 				sophie_card.credit("$100")
 				sophie_card.credit("3322")
-				sophie_card.ballance.should eq 0
+				sophie_card.ballance.should eq 'error'
 			end
 
 			it "should not let you credit a valid card with an amount that is not a whole number" do
