@@ -33,7 +33,7 @@ class ApplicationUserInterface
 			elsif command[0..6].downcase == "charge "
 				charge_a_card(parse(command))
 			else 
-				display_error_message
+				display_error_message(command)
 			end
 			break if finished # This was necessary for rspec testing
 			command = command_prompt

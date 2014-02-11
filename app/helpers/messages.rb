@@ -22,6 +22,7 @@ module Messages
 	def error_message(command)
 		<<-String
 		Sorry, but #{command} is not a valid prompt.
+
 		Please enter a valid command or type HELP to see a list of command options.
 
 		String

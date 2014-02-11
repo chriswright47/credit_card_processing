@@ -12,7 +12,7 @@ module RuntimeUtils
 	end
 
 	def format_info(parsed_info)
-		parsed_info.shift #remove unnecessary first element - i.e. 'add' or 'credit'
+		parsed_info = shift_and_capitalize(parsed_info)
 		formatted_hash = Hash.new
 		if parsed_info.length == 3 # that is, if command_prompt started with'add'
 			CARD_CREATION_INFO.each do |element|
@@ -40,4 +40,9 @@ module RuntimeUtils
 		limit[0] == '$' && limit[1..-1].to_i != 0 && limit[1].to_i != 0 # the first character of the limit needs to be a $, the rest needs to be a non 0 number
 	end
 
+	def shift_and_capitalize(parsed_info)
+		parsed_info.shift #remove unnecessary first element - i.e. 'add' or 'credit'
+		parsed_info.first.capitalize # Important name formatting so we dont have duplicate users
+		parsed_info
+	end
 end

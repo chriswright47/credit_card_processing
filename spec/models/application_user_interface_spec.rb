@@ -54,35 +54,85 @@ describe ApplicationUserInterface do
 
 			it "should create a new credit card object if the user's first input word is 'add '" do
 				interface = ApplicationUserInterface.new(CreditCard)
-				interface.stub(:command_prompt) {"ADD wesley 4012888888881881 $10000"}
-				interface.stub(:finished) {true}
-				interface.run
-				interface.session_information[0].class.should eq CreditCard
-				interface.stub(:command_prompt) {"add Jennifer 418594354352 $500"}
-				interface.stub(:finished) {true}
-				interface.run
-				interface.session_information[1].class.should eq CreditCard
+				VALID_ADD_PROMPTS.each do |prompt|
+					interface.stub(:command_prompt) {prompt}
+					interface.stub(:finished) {true}
+					interface.run
+					interface.session_information.each {|element| element.class.should eq CreditCard }
+				end
 			end
 
-			it "should not create a new credit card object if the user's add input is incorrect " do
+			it "should not create a new credit card object if the user's add input is incorrectly formatted" do
 				interface = ApplicationUserInterface.new(CreditCard)
-				interface.stub(:command_prompt) {"ADD 4012888888881881 $10000 "}
-				interface.stub(:finished) {true}
-				interface.run
-				interface.session_information[0].class.should eq CreditCard
+				INVALID_ADD_PROMPTS.each do |prompt|
+					interface.stub(:command_prompt) {prompt}
+					interface.stub(:finished) {true}
+					interface.run
+					interface.session_information.length.should eq 0
+				end
 			end
 
-			it "should update the ballance of the card with a new charge if the first word is charge" do
+			# this can be changed easily, but I decided to do this for the MVP to save me some work
+			it "should not create a new credit card object if a credit card object already exists for a user of that name" do
+				interface = ApplicationUserInterface.new(CreditCard)
+				2.times do
+					VALID_ADD_PROMPTS.each do |prompt|
+						interface.stub(:command_prompt) {prompt}
+						interface.stub(:finished) {true}
+						interface.run
+					end
+				end
+				interface.session_information.length.should eq 6
+			end
+
+			it "should update the ballance of an existing card with a new charge if the first word is charge" do
+				interface = ApplicationUserInterface.new(CreditCard)
+				VALID_ADD_PROMPTS.each do |prompt|
+					interface.stub(:command_prompt) {prompt}
+					interface.stub(:finished) {true}
+					interface.run
+				end
+				TEST_CHARGES.each do |charge|
+					interface.stub(:command_prompt) {charge}
+					interface.stub(:finished) {true}
+					interface.run
+				end
+				interface.session_information[0].ballance.should eq 55
+				interface.session_information[1].ballance.should eq 1
+				interface.session_information[2].ballance.should eq 2000
+				interface.session_information[3].ballance.should eq 94
+				interface.session_information[4].ballance.should eq "error"
+				interface.session_information[5].ballance.should eq 0
+			end
+
+			it "should not update the ballance of a card if the card does not exist" do
+				interface = ApplicationUserInterface.new(CreditCard)
+				VALID_ADD_PROMPTS.each do |prompt|
+					interface.stub(:command_prompt) {prompt}
+					interface.stub(:finished) {true}
+					interface.run
+				end
+			end
+
+			it "should update the ballance of an existing card with a new credit if the first word is credit" do
+				interface = ApplicationUserInterface.new(CreditCard)
+				VALID_ADD_PROMPTS.each do |prompt|
+					interface.stub(:command_prompt) {prompt}
+					interface.stub(:finished) {true}
+					interface.run
+				end
+			end
+
+			it "should update the ballance of an existing card with a new credit if the first word is credit" do
 
 			end
 
-			it "should update the ballance of the card with a new credit if the first word is credit" do
 
-			end
 
 			it "should let the user know that the command they entered is not a valid input if that is the case" do
 
 			end
 		end
+		#let the user know that the user does not exist
 	end
 end
