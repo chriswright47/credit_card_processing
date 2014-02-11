@@ -8,7 +8,6 @@ class CreditCard
 	# We need readers so that we can test attributes with Rspec
 	attr_reader :name, :number, :limit, :valid
 	
-
 	def initialize(params)
 		@name = params.fetch(:name,nil)
 		@number = params.fetch(:number,nil)
@@ -45,7 +44,7 @@ class CreditCard
 	end
 
 	def format_amount(dollar_string)
-		if dollar_string[0] != '$' || dollar_string[1].to_i == 0
+		if dollar_string[0] != '$' || dollar_string[1..-1].to_i == 0
 			raise ArgumentError.new("Dollar ammount must start with a '$' sign and be followed by a valid number")
 		end
 		dollar_string[1..-1].to_i

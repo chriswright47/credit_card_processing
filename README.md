@@ -72,3 +72,5 @@ If we get further in this process I know you guys are going to ask me to extend 
 	# def finished
 	# end
 
+
+I tried to write this in a very modular way, which is why there are redundant raise exception ... and checks in the runtime utils module. So that the credit card class could be used elsewhere if you wanted to.

@@ -14,7 +14,13 @@ class ApplicationUserInterface
 		@credit_card = credit_card
 	end
 
-	def run 
+	def run
+		session_driver
+	end
+
+	private
+
+	def session_driver
 		display_valid_commands
 		command = command_prompt
 		until command.downcase == "done"
@@ -30,27 +36,21 @@ class ApplicationUserInterface
 				display_error_message
 			end
 			break if finished # I had to do this for rspec testing
-		command = command_prompt
+			command = command_prompt
 		end
 		display_session_summary
 	end
 
-
-	private
-
 	def already_exists(user)
-		self.session_information.fetch(user, nil)
 		# If the user already exists then we need to present them with a list of 
+		self.session_information.fetch(user, nil)
 	end
-
 
 	def create_new_card(card_information)
-		return display_error_message(card_information) unless check_validity?(card_information)
+		#this would be an invalid command with too many words
+		return display_error_message(card_information) unless card_information.length == 3 
+		#check to see if user already exists
 		self.session_information << self.credit_card.new(card_information)
-	end
-
-	def check_validity?(card_information)
-		card_information.length >
 	end
 
 	def fetch_a_card(card_owner)
@@ -75,6 +75,10 @@ class ApplicationUserInterface
 			return
 		end
 		card.charge(params[:amount])
+	end
+
+	def display_redundant_user_warning(user_name)
+		puts invalid_user_message(user_name)
 	end
 
 	def display_session_summary
