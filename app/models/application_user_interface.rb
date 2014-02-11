@@ -1,5 +1,3 @@
-
-
 class ApplicationUserInterface
 
 	# this module contains all the raw messages to be displayed by the run method
@@ -23,7 +21,7 @@ class ApplicationUserInterface
 			if command.downcase == "help"
 				display_valid_commands
 			elsif command[0..2].downcase == "add"
-				create_new_card(parse(command, "add"))
+				create_new_card(parse(command))
 			elsif command[0..5].downcase == "credit"
 				credit_a_card(parse(command))
 			elsif command[0..5].downcase == "charge"
@@ -45,20 +43,38 @@ class ApplicationUserInterface
 		# If the user already exists then we need to present them with a list of 
 	end
 
+
 	def create_new_card(card_information)
+		return display_error_message(card_information) unless check_validity?(card_information)
 		self.session_information << self.credit_card.new(card_information)
 	end
 
-	def fetch_a_card(name)
-		
+	def check_validity?(card_information)
+		card_information.length >
+	end
+
+	def fetch_a_card(card_owner)
+		self.session_information.each do |element|
+			return element if element.name == card_owner
+		end
 	end
 
 	def credit_a_card(params)
-		self.credit_card.credit(params)
+		card = fetch_a_card(params.fetch(:name,nil))
+		if card == nil
+			puts "User with that name was not found"
+			return
+		end
+		card.credit(params[:amount])
 	end
 
 	def charge_a_card(params)
-		self.credit_card.charge(params)
+		card = fetch_a_card(params.fetch(:name,nil))
+		if card == nil
+			puts "User with that name was not found"
+			return
+		end
+		card.charge(params[:amount])
 	end
 
 	def display_session_summary

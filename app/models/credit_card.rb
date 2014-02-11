@@ -39,6 +39,7 @@ class CreditCard
 		self.name != nil && self.number != nil && self.limit != nil
 	end
 
+	# check card is a method of the Luhn10 module
 	def valid_card?(number)
 		check_card(number)
 	end
