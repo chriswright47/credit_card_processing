@@ -46,11 +46,11 @@ class ApplicationUserInterface
 		self.session_information.fetch(user, nil)
 	end
 
-	def create_new_card(card_information)
+	def create_new_card(card_info)
 		#this would be an invalid command with too many words
-		return display_error_message(card_information) unless card_information.length == 3 
-		#check to see if user already exists
-		self.session_information << self.credit_card.new(card_information)
+		return display_error_message(card_info) unless card_info.length == 3 
+		return user_warning(card_info[:name]) if already_exists(card_info[:name])
+		self.session_information << self.credit_card.new(card_info)
 	end
 
 	def fetch_a_card(card_owner)
@@ -77,7 +77,7 @@ class ApplicationUserInterface
 		card.charge(params[:amount])
 	end
 
-	def display_redundant_user_warning(user_name)
+	def user_warning(user_name)
 		puts invalid_user_message(user_name)
 	end
 
