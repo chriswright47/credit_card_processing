@@ -52,16 +52,24 @@ describe ApplicationUserInterface do
 				interface.run.should eq TEST_FORMATTED_SESSION_INFO
 			end
 
-			it "should create a new credit card object if the user's first input word is add" do
+			it "should create a new credit card object if the user's first input word is 'add '" do
 				interface = ApplicationUserInterface.new(CreditCard)
 				interface.stub(:command_prompt) {"ADD wesley 4012888888881881 $10000"}
 				interface.stub(:finished) {true}
 				interface.run
-				# interface.session_information.should eq [{:name => "Wesley", :number => 4012888888881881, :limit => 10000}]
+				interface.session_information[0].class.should eq CreditCard
+				interface.stub(:command_prompt) {"add Jennifer 418594354352 $500"}
+				interface.stub(:finished) {true}
+				interface.run
+				interface.session_information[1].class.should eq CreditCard
 			end
 
 			it "should not create a new credit card object if the user's add input is incorrect " do
-
+				interface = ApplicationUserInterface.new(CreditCard)
+				interface.stub(:command_prompt) {"ADD 4012888888881881 $10000 "}
+				interface.stub(:finished) {true}
+				interface.run
+				interface.session_information[0].class.should eq CreditCard
 			end
 
 			it "should update the ballance of the card with a new charge if the first word is charge" do

@@ -43,8 +43,9 @@ class CreditCard
 		check_card(number)
 	end
 
+	#here we check the first number to
 	def format_amount(dollar_string)
-		if dollar_string[0] != '$' || dollar_string[1..-1].to_i == 0
+		if dollar_string[0] != '$' || dollar_string[1..-1].to_i == 0 || dollar_string[1].to_i == 0
 			raise ArgumentError.new("Dollar ammount must start with a '$' sign and be followed by a valid number")
 		end
 		dollar_string[1..-1].to_i

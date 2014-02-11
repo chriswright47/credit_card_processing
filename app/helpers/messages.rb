@@ -31,7 +31,7 @@ module Messages
 	def session_summary_message(session_hash)
 		tmp_array =[]
 		session_hash.each do |element|
-			tmp_array << "#{element.fetch(:name,nil)}: $#{element.fetch(:ballance,"error")}\n"
+			tmp_array << "#{element.name}: $#{element.ballance}\n"
 		end
 		tmp_array
 	end

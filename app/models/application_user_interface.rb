@@ -26,30 +26,27 @@ class ApplicationUserInterface
 		until command.downcase == "done"
 			if command.downcase == "help"
 				display_valid_commands
-			elsif command[0..2].downcase == "add"
+			elsif command[0..3].downcase == "add "
 				create_new_card(parse(command))
-			elsif command[0..5].downcase == "credit"
+			elsif command[0..6].downcase == "credit "
 				credit_a_card(parse(command))
-			elsif command[0..5].downcase == "charge"
+			elsif command[0..6].downcase == "charge "
 				charge_a_card(parse(command))
 			else 
 				display_error_message
 			end
-			break if finished # I had to do this for rspec testing
+			break if finished # This was necessary for rspec testing
 			command = command_prompt
 		end
 		display_session_summary
 	end
 
-	def already_exists(user)
-		self.session_information.fetch(user, nil)
-	end
 
 	def create_new_card(card_info)
 		# this would be an invalid command with too many words
 		return display_error_message(card_info) unless card_info.length == 3 
-		# for now, we are not allowing users of the same name
-		return user_warning(card_info[:name]) if already_exists(card_info[:name]) ## deal with getting this in the right format
+		# for now, we are not allowing users of the same name 
+		return user_warning(card_info[:name]) if fetch_a_card(card_info[:name]) ## deal with getting this in the right format
 		self.session_information << self.credit_card.new(card_info)
 	end
 
@@ -57,23 +54,18 @@ class ApplicationUserInterface
 		self.session_information.each do |element|
 			return element if element.name == card_owner
 		end
+		nil
 	end
 
 	def credit_a_card(params)
 		card = fetch_a_card(params.fetch(:name,nil))
-		if card == nil
-			puts "User with that name was not found"
-			return
-		end
+		return display_error_message("Card not fount") unless card
 		card.credit(params[:amount])
 	end
 
 	def charge_a_card(params)
 		card = fetch_a_card(params.fetch(:name,nil))
-		if card == nil
-			puts "User with that name was not found"
-			return
-		end
+		return display_error_message("Card not fount") unless card
 		card.charge(params[:amount])
 	end
 

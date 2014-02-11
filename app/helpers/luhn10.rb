@@ -1,7 +1,7 @@
 module Luhn10
 	def check_card(number)
 		# Preventing bad inputs
-		raise ArgumentError.new("Invalid Input: must be a number") unless number.is_a? Fixnum
+		raise ArgumentError.new("Invalid Input: must be a valid number") if number.to_i == 0
 		raise ArgumentError.new("Invalid Input: must be under 20 digits") if number.to_s.length > 19
 		# Empty string container for our final number
 		number_string = ""
