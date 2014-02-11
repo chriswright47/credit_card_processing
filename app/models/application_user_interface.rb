@@ -42,14 +42,14 @@ class ApplicationUserInterface
 	end
 
 	def already_exists(user)
-		# If the user already exists then we need to present them with a list of 
 		self.session_information.fetch(user, nil)
 	end
 
 	def create_new_card(card_info)
-		#this would be an invalid command with too many words
+		# this would be an invalid command with too many words
 		return display_error_message(card_info) unless card_info.length == 3 
-		return user_warning(card_info[:name]) if already_exists(card_info[:name])
+		# for now, we are not allowing users of the same name
+		return user_warning(card_info[:name]) if already_exists(card_info[:name]) ## deal with getting this in the right format
 		self.session_information << self.credit_card.new(card_info)
 	end
 
