@@ -14,10 +14,8 @@ class ApplicationUserInterface
 	def initialize(credit_card)
 		@session_information = Array.new
 		@credit_card = credit_card
-		raise ArgumentError.new("Must be initialized with a credit card class") unless @credit_card.is_a?(Class)
 	end
 
-	#need to deal with exceptions that are going to be raised
 	def run 
 		display_valid_commands
 		command = command_prompt
@@ -25,7 +23,7 @@ class ApplicationUserInterface
 			if command.downcase == "help"
 				display_valid_commands
 			elsif command[0..2].downcase == "add"
-				create_new_card(parse(command))
+				create_new_card(parse(command, "add"))
 			elsif command[0..5].downcase == "credit"
 				credit_a_card(parse(command))
 			elsif command[0..5].downcase == "charge"
@@ -49,6 +47,18 @@ class ApplicationUserInterface
 
 	def create_new_card(card_information)
 		self.session_information << self.credit_card.new(card_information)
+	end
+
+	def fetch_a_card(name)
+		
+	end
+
+	def credit_a_card(params)
+		self.credit_card.credit(params)
+	end
+
+	def charge_a_card(params)
+		self.credit_card.charge(params)
 	end
 
 	def display_session_summary

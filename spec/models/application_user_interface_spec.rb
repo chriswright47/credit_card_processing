@@ -4,10 +4,8 @@ describe ApplicationUserInterface do
 
 	context "Initialization" do
 
-		it "should require a new class object as an argument" do
-			YoloClass = Struct.new(:name, :number, :limit)
-			expect { ApplicationUserInterface.new(YoloClass) }.not_to raise_error
-			expect { ApplicationUserInterface.new("Hi") }.to raise_error
+		it "should" do 
+
 		end
 	end
 
@@ -18,8 +16,8 @@ describe ApplicationUserInterface do
 			# the welcome_message from the Messages module. Here I am testing 
 			# the message itself, which the string that the wrapper method uses.
 			it "should puts out a welcome message for the user" do
-				YoloClass = Struct.new(:name, :number, :limit)
-				interface = ApplicationUserInterface.new(YoloClass)
+				TestCard = Struct.new(:name, :number, :limit)
+				interface = ApplicationUserInterface.new(TestCard)
 				interface.welcome_message.should eq WELCOME_MESSAGE
 			end
 		end
@@ -33,11 +31,11 @@ describe ApplicationUserInterface do
 
 		context "run" do
 
-			# This was a very tricky method to test, see the readme for my notes
+			# This was a tricky method to test, see the readme for my notes
 
 			it "should print out the welcome message if the user input is help" do
-				YoloClass = Struct.new(:name, :number, :limit)
-				interface = ApplicationUserInterface.new(YoloClass)
+				TestCard = Struct.new(:name, :number, :limit)
+				interface = ApplicationUserInterface.new(TestCard)
 				interface.stub(:command_prompt) {"help"}
 				interface.stub(:finished) {true}
 				interface.stub(:display_valid_commands) { WELCOME_MESSAGE }
@@ -46,15 +44,23 @@ describe ApplicationUserInterface do
 			end
 
 			it "should print out all the user's credit card info and ballances if the user enters 'done'" do
-				YoloClass = Struct.new(:name, :number, :limit)
-				interface = ApplicationUserInterface.new(YoloClass)
+				TestCard = Struct.new(:name, :number, :limit)
+				interface = ApplicationUserInterface.new(TestCard)
 				interface.stub(:command_prompt) {"done"}
 				interface.stub(:finished) {true}
-				interface.stub(:session_information) {TEST_SESSION_INFORMATION}
-				interface.session_summary_message(interface.session_information).should eq ["Andrew: $33\n", "Joe: $933\n", "Tyson: $-400\n"]
+				interface.stub(:display_session_summary) {TEST_FORMATTED_SESSION_INFO}
+				interface.run.should eq TEST_FORMATTED_SESSION_INFO
 			end
 
 			it "should create a new credit card object if the user's first input word is add" do
+				interface = ApplicationUserInterface.new(CreditCard)
+				interface.stub(:command_prompt) {"ADD wesley 4012888888881881 $10000"}
+				interface.stub(:finished) {true}
+				interface.run
+				# interface.session_information.should eq [{:name => "Wesley", :number => 4012888888881881, :limit => 10000}]
+			end
+
+			it "should not create a new credit card object if the user's add input is incorrect " do
 
 			end
 
