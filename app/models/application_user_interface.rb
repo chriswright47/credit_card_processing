@@ -57,6 +57,10 @@ class ApplicationUserInterface
 		nil
 	end
 
+	# there could be an argument made to refactor credit_a_card and charge_a_card 
+	# into one method, but because they do completely opposite things I have kept 
+	# them separate despite the duplicative look of the code
+	
 	def credit_a_card(params)
 		return display_error_message(params) unless correct_length(params)
 		card = fetch_a_card(params[:name].capitalize)
@@ -80,7 +84,7 @@ class ApplicationUserInterface
 	end
 
 	def correct_creation_params(params)
-		params.length ==3
+		params.length == 3
 	end
 
 	def display_session_summary
