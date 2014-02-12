@@ -29,7 +29,7 @@ describe ApplicationUserInterface do
 			end
 		end
 
-		context "run" do
+		context "session_driver" do
 
 			# This was a tricky method to test, see the readme for my notes
 
@@ -47,7 +47,6 @@ describe ApplicationUserInterface do
 				TestCard = Struct.new(:name, :number, :limit)
 				interface = ApplicationUserInterface.new(TestCard)
 				interface.stub(:command_prompt) {"done"}
-				interface.stub(:finished) {true}
 				interface.stub(:display_session_summary) {TEST_FORMATTED_SESSION_INFO}
 				interface.run.should eq TEST_FORMATTED_SESSION_INFO
 			end
@@ -105,13 +104,14 @@ describe ApplicationUserInterface do
 				interface.session_information[5].ballance.should eq 0
 			end
 
-			it "should not update the ballance of a card if the card does not exist" do
+			it "should return an error message if you try to charge a card that does not exist" do
 				interface = ApplicationUserInterface.new(CreditCard)
-				VALID_ADD_PROMPTS.each do |prompt|
-					interface.stub(:command_prompt) {prompt}
-					interface.stub(:finished) {true}
-					interface.run
-				end
+				interface.stub(:command_prompt) {"charge tom $1000"}
+				interface.stub(:finished) {true}
+				interface.stub(:charge_a_card) {"Card not found"}
+				interface.stub(:display_session_summary) {interface.send(:charge_a_card)}
+				interface.run.should eq "Card not found"
+				interface.session_information.should eq []
 			end
 
 			it "should update the ballance of an existing card with a new credit if the first word is credit" do
@@ -121,17 +121,33 @@ describe ApplicationUserInterface do
 					interface.stub(:finished) {true}
 					interface.run
 				end
+				TEST_CREDITS.each do |charge|
+					interface.stub(:command_prompt) {charge}
+					interface.stub(:finished) {true}
+					interface.run
+				end
+				interface.session_information[0].ballance.should eq -110
+				interface.session_information[1].ballance.should eq -2
+				interface.session_information[2].ballance.should eq -4000
+				interface.session_information[3].ballance.should eq -188
+				interface.session_information[4].ballance.should eq "error"
+				interface.session_information[5].ballance.should eq -20
 			end
-
-			it "should update the ballance of an existing card with a new credit if the first word is credit" do
-
-			end
-
-
 
 			it "should let the user know that the command they entered is not a valid input if that is the case" do
-
+				interface = ApplicationUserInterface.new(CreditCard)
+				INVALID_USER_PROMPTS.each do |prompt|
+					interface.stub(:command_prompt) {prompt}
+					interface.stub(:finished) {true}
+					interface.stub(:display_error_message) { set_error_message(prompt) }
+					interface.stub(:display_session_summary) { interface.send(:display_error_message) }
+					interface.run.should eq set_error_message(prompt)
+				end
 			end
+		end
+
+		context do
+
 		end
 		#let the user know that the user does not exist
 	end

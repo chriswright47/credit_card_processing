@@ -1,8 +1,8 @@
 TEST_COMMAND_LINE_PROMPTS = {
 
-	"ADD Wesley 4012888888881881 $10000" => {:name => "Wesley", :number => "4012888888881881", :limit => "$10000"},
-	"credit jamie $100" => {:name=>"jamie", :amount=>"$100"},
-	"charge shari $4400" => {:name=>"shari", :amount=>"$4400"},
+	"ADD wesley 4012888888881881 $10000" => {:name => "Wesley", :number => "4012888888881881", :limit => "$10000"},
+	"credit jamie $100" => {:name=>"Jamie", :amount=>"$100"},
+	"charge Shari $4400" => {:name=>"Shari", :amount=>"$4400"},
 	"this is not a valid prompt" => "this is not a valid prompt"
 }
 
@@ -17,7 +17,7 @@ VALID_ADD_PROMPTS = ["ADD Wesley 4012888888881881 $10000",
 										 "add Nugen 5555555555554444 $55345",
 										 "aDD David 5555555555554444 $100",
 										 "Add bea323triz 83938475849302933 $6664",
-										 "adD warren 4012888888881881 $4000", 
+										 "adD warren 4012888888881881 $4000" 
 										]
 
 INVALID_ADD_PROMPTS = ["ADD3 Wesley 4012888888881881 $10000",
@@ -26,12 +26,26 @@ INVALID_ADD_PROMPTS = ["ADD3 Wesley 4012888888881881 $10000",
 										 "aDD 894503450293454545 $100",
 										 "Add $6664",
 										 "adD warren ewer4012888888881881 $4000", 
-										 "add wilco 5555555555554444 $ 4000", 
+										 "add wilco 5555555555554444 $ 4000",
 										]
 
-TEST_CHARGES = ["Charge Wesley $55",
+TEST_CHARGES = ["charge Warren $00",
+								"charge Wesley $55",
 								"charGe Jennifer $1",	
-								"charge Nugen $2000",
-								"charge David $94",
+								"charge nugen $2000",
+								"charge david $94",
+								"charge Bea323triz $999999"
 							 ]
-TEST_BALLANCES = [55,1,2000,94,"error","error"]
+
+
+TEST_CREDITS = ["credit Warren $20",
+								"credit Wesley $110",
+								"credit Jennifer $2",	
+								"credit nugen $4000",
+								"credit david $188",
+								"credit Bea323triz $50"
+							 ]
+INVALID_USER_PROMPTS = ["salted pork",
+												"the empire strikes back",
+												"blake griffin vs justin bieber"
+												]

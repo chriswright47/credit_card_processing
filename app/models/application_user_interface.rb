@@ -44,7 +44,7 @@ class ApplicationUserInterface
 
 	def create_new_card(card_info)
 		# this would be an invalid command with too many words
-		return display_error_message(card_info) unless card_info.length == 3 
+		return display_error_message(card_info) unless correct_creation_params(card_info)
 		# for now, we are not allowing users of the same name 
 		return user_warning(card_info[:name]) if fetch_a_card(card_info[:name]) ## deal with getting this in the right format
 		self.session_information << self.credit_card.new(card_info)
@@ -58,19 +58,29 @@ class ApplicationUserInterface
 	end
 
 	def credit_a_card(params)
-		card = fetch_a_card(params.fetch(:name,nil))
+		return display_error_message(params) unless correct_length(params)
+		card = fetch_a_card(params[:name].capitalize)
 		return display_error_message("Card not fount") unless card
 		card.credit(params[:amount])
 	end
 
 	def charge_a_card(params)
-		card = fetch_a_card(params.fetch(:name,nil))
+		return display_error_message(params) unless correct_length(params)
+		card = fetch_a_card(params[:name].capitalize)
 		return display_error_message("Card not fount") unless card
 		card.charge(params[:amount])
 	end
 
 	def user_warning(user_name)
 		puts invalid_user_message(user_name)
+	end
+
+	def correct_length(params)
+		params.length == 2
+	end
+
+	def correct_creation_params(params)
+		params.length ==3
 	end
 
 	def display_session_summary

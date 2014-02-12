@@ -11,8 +11,8 @@ module RuntimeUtils
 		check_validity(formatted_info)
 	end
 
-	def format_info(parsed_info)
-		parsed_info = shift_and_capitalize(parsed_info)
+	def format_info(split_info)
+		parsed_info = shift_and_capitalize(split_info)
 		formatted_hash = Hash.new
 		if parsed_info.length == 3 # that is, if command_prompt started with'add'
 			CARD_CREATION_INFO.each do |element|
@@ -28,7 +28,7 @@ module RuntimeUtils
 
 	def check_validity(formatted_info)
 		unless is_limit_valid?(formatted_info.values.last) # both limit and amount need to be in the correct format
-			return "Limits and ammounts must start with a '$' sign and be followed by a valid number"
+			return "Limits and charge ammounts must start with a '$' sign and be followed by a valid number"
 		end
 		if formatted_info.length == 3 #the card number needs to be an actual number
 			return "That is not a valid number" if formatted_info[:number].to_i == 0
@@ -42,7 +42,7 @@ module RuntimeUtils
 
 	def shift_and_capitalize(parsed_info)
 		parsed_info.shift #remove unnecessary first element - i.e. 'add' or 'credit'
-		parsed_info.first.capitalize # Important name formatting so we dont have duplicate users
+		parsed_info.first.capitalize! # Important name formatting so we dont have duplicate users
 		parsed_info
 	end
 end
