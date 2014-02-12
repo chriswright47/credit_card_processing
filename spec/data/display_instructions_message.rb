@@ -19,11 +19,11 @@ WELCOME_MESSAGE = <<-String
 
 
 def set_error_message(command)
-	
-	<<-String
-	Sorry, but #{command} is not a valid prompt.
-	Please enter a valid command or type HELP to see a list of command options.
+		<<-String
+		Sorry, but #{command} is not a valid prompt.
 
-	String
+		Please enter a valid command or type HELP to see a list of command options.
 
-end
+		String
+
+	end
