@@ -54,7 +54,7 @@ describe CreditCard do
 				brittnay_card.ballance.should eq 'error'
 			end
 
-			# As per the initial input assumptions, we can change this easily enough later on if we like
+			# As per the initial input specs you gave, we can change this easily enough later on if we like
 			it "should not let you change a valid card an amount that is not a whole number" do
 				jessica_card = CreditCard.new({:name => "Jessica", :number => 5610591081018250, :limit => "$4333"})
 				expect { jessica_card.charge("$14.55") }.to raise_error
@@ -124,7 +124,4 @@ describe CreditCard do
 			heather_card.limit.should eq 987654321
 		end
 	end
-	# valid_card? is just a wrapper method for the charge_card method in the Luhn10 Module
-	# and I felt that testing it again here again would be a bit redundant since we already
-	# test both the valid attribute and the method itself extensively 
 end

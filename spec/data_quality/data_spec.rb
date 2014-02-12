@@ -166,6 +166,6 @@ end
 describe "NAN" do
 
 	it "should be equal to the following string" do
-		NAN.should eq "That is not a valid number"
+		NAN.should eq "That is not a valid number or it is more than 19 digits"
 	end
 end

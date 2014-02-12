@@ -60,21 +60,22 @@ module RuntimeUtils
 		end
 		if is_this_add_card_info?(formatted_info)
 			if invalid_number?(formatted_info[:number])
-				return "That is not a valid number"
+				return "That is not a valid number or it is more than 19 digits"
 			end
 		end
 		formatted_info
 	end
 
-	# is the number to_i the same length as the original number? If not it is not a number
+	# is the number to_i the same length as the original number?
+	# is the number greater than 19 digits? 
 	def invalid_number?(number)
-		number.length != number.to_i.to_s.length
+		number.length != number.to_i.to_s.length || number.length > 19
 	end
 
-	# the first character of the limit needs to be a $, the rest needs to be a valid number
-	# and the number cannot begin with 0 such as 022323
+	# the first character of the limit needs to be a $, the rest needs to be a valid number,
+	# the number cannot begin with 0 such as 022323.
 	def is_limit_valid?(limit)
-		limit[0] == '$' && !invalid_number?(limit[1..-1]) && limit[1].to_i != 0 
+		limit[0] == '$' && !invalid_number?(limit[1..-1]) && limit[1].to_i != 0
 	end
 
 	# first we remove the unnecessary first element - i.e. 'add' or 'credit'

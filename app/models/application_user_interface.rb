@@ -21,7 +21,8 @@ class ApplicationUserInterface
 	end
 
 	private
-
+	# this is the main method of this class, its function is to run the application
+	# until a user enter's done
 	def session_driver
 		display_valid_commands
 		command = command_prompt
@@ -52,6 +53,8 @@ class ApplicationUserInterface
 		self.session_information << self.credit_card.new(card_info)
 	end
 
+	# this method looks in session_information for a card that matches an owner's name
+	# and if no such card is found nil is returned
 	def fetch_a_card(card_owner)
 		self.session_information.each do |element|
 			return element if element.name == card_owner
@@ -61,7 +64,8 @@ class ApplicationUserInterface
 
 	# there could be an argument made to refactor credit_a_card and charge_a_card 
 	# into one method, but because they do completely opposite things I have kept 
-	# them separate despite the duplicative look of the code
+	# them separate despite the duplicative look of the code. These methods
+	# call the card's credit and charge methods respectively
 	
 	def credit_a_card(params)
 		return display_error_message(params) unless correct_length(params)
@@ -105,7 +109,7 @@ class ApplicationUserInterface
 		puts invalid_user_message(user_name)
 	end
 
-	#See my readme for an explination for this method
+	#See my readme for an explination about this method
 	def finished
 	end
 

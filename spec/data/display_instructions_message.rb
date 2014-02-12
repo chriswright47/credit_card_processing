@@ -1,6 +1,5 @@
-# This is the welcome message from the display_valid_commands method in the
-# application_user_interface.rb. I will be using this in the application_user_interface_spec
-# to ensure the message being displayed does not accidentally get changed somehow.
+# I will be using this info in some of the specs I am writing to ensure
+# the messages being displayed does not accidentally get changed somehow.
 
 WELCOME_MESSAGE = <<-String
 

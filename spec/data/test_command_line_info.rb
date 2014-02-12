@@ -1,4 +1,5 @@
-# This is various test information that the specs use. This information is also tested
+# This is various test information that the specs use. This information itself is also tested
+# in the data_spec, so don't change it.
 
 TEST_COMMAND_LINE_PROMPTS = {
 
@@ -65,5 +66,5 @@ TEST_ALREADY_EXISTS_INFO = 	"Sorry, but a user with the name of 'Tom' already ex
 
 BAD_AMOUNT = "Limits and charge ammounts must start with a '$' sign and be followed by a valid whole number."
 
-NAN = "That is not a valid number"
+NAN = "That is not a valid number or it is more than 19 digits"
 
