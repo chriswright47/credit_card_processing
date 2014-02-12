@@ -14,11 +14,11 @@ SPLIT_TEST_COMMAND_LINE_PROMPTS = {["ADD", "wesley", "4012888888881881", "$10000
 	["this", "is", "not", "a", "valid", "prompt"] => {:name=>"Is", :amount=>"not"}
 }
 
+VALID_NEW_CARD = { :name=> "Miley",:number =>"4433099586883995", :limit => "$5000"}
+
 TEST_SESSION_INFORMATION = [{:name =>"Andrew", :ballance => 33}, {:name =>"Joe", :ballance => 933}, {:name => "Tyson", :ballance => -400}]
 
 TEST_FORMATTED_SESSION_INFO = ["Andrew: $33\n", "Joe: $933\n", "Tyson: $-400\n"]
-
-TEST_CARD_PARAMS = {:name=> "Tyson", :number=>3530111333300000, :limit => "$4000"}
 
 VALID_ADD_PROMPTS = ["ADD Wesley 4012888888881881 $10000",
 										 "AdD Jennifer 5555555555554444 $1",
@@ -59,3 +59,8 @@ INVALID_USER_PROMPTS = ["salted pork",
 												]
 
 TEST_NOT_FOUND_INFO = "User tom does not exist. You must create a card for them first\n"
+
+BAD_AMOUNT = "Limits and charge ammounts must start with a '$' sign and be followed by a valid number"
+
+NAN = "That is not a valid number"
+

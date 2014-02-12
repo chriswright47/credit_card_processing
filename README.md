@@ -19,6 +19,8 @@ a lot of testing, using rspec, and when things were unclear as to how to tests -
 
 I took a tdd approach to the code
 
+when I got stuck with an error i did not understand ... such as the capatialize!, or number to_i not equaling 0 I would copy my work over to another file and test there
+
 If we get further in this process I know you guys are going to ask me to extend the code, so I took advantage of modules, and orginized my files in a way that will hopefully make it easy to add new features and functionality
 
 Usually I would not test private methods, I would do tests that 

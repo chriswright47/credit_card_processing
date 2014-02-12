@@ -16,7 +16,7 @@ module RuntimeUtils
 
 	def parse(command_line_info)
 		info = command_line_info.split(" ")
-		return command_line_info if too_big_or_small(info)
+		return command_line_info if too_big_or_small?(info)
 		formatted_info = format_info(info)
 		check_validity(formatted_info)
 	end
@@ -32,7 +32,7 @@ module RuntimeUtils
 	def format_info(split_info)
 		parsed_info = shift_and_capitalize(split_info)
 		formatted_hash = Hash.new
-		if check_length(parsed_info)
+		if is_this_add_card_info?(parsed_info)
 			CARD_CREATION_INFO.each do |element|
 				formatted_hash[element] = parsed_info.shift
 			end
@@ -53,18 +53,23 @@ module RuntimeUtils
 		unless is_limit_valid?(formatted_info.values.last) 
 			return "Limits and charge ammounts must start with a '$' sign and be followed by a valid number"
 		end
-		if check_length(formatted_info)
-			if formatted_info[:number].to_i == 0
+		if is_this_add_card_info?(formatted_info)
+			if invalid_number?(formatted_info[:number])
 				return "That is not a valid number"
 			end
 		end
 		formatted_info
 	end
 
-	# the first character of the limit needs to be a $, the rest needs to be a non 0 number
+	# is the number to_i the same length as the original number? If not it is not a number
+	def invalid_number?(number)
+		number.length != number.to_i.to_s.length
+	end
+
+	# the first character of the limit needs to be a $, the rest needs to be a valid number
 	# and the number cannot begin with 0 such as 022323
 	def is_limit_valid?(limit)
-		limit[0] == '$' && limit[1..-1].to_i != 0 && limit[1].to_i != 0 
+		limit[0] == '$' && !invalid_number?(limit[1..-1]) && limit[1].to_i != 0 
 	end
 
 	# first we remove the unnecessary first element - i.e. 'add' or 'credit'
@@ -77,14 +82,15 @@ module RuntimeUtils
 		parsed_info
 	end
 
-	def check_length(parsed_info)
-		parsed_info.length == 3
-	end
-
 	# once we split up the information, if its split length is greater than 4 or less than 3
 	# the user prompt that was passed in is invalid
-	def too_big_or_small(info)
+	def too_big_or_small?(info)
 		info.length > 4 || info.length < 3
+	end
+
+	# for checking to see if the parsed_info is for adding a new credit card
+	def is_this_add_card_info?(parsed_info)
+		parsed_info.length == 3
 	end
 
 end

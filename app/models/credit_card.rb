@@ -2,6 +2,8 @@ class CreditCard
 
 	include Luhn10
 
+	include RuntimeUtils
+
 	# We need an accessor for ballance so that we can charge the card and see the ballance due
 	attr_accessor :ballance
 
@@ -45,7 +47,7 @@ class CreditCard
 
 	#here we check the first number to
 	def format_amount(dollar_string)
-		if dollar_string[0] != '$' || dollar_string[1..-1].to_i == 0 || dollar_string[1].to_i == 0
+		unless is_limit_valid?(dollar_string)
 			raise ArgumentError.new("Dollar ammount must start with a '$' sign and be followed by a valid number")
 		end
 		dollar_string[1..-1].to_i
