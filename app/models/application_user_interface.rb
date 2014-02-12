@@ -60,14 +60,14 @@ class ApplicationUserInterface
 	def credit_a_card(params)
 		return display_error_message(params) unless correct_length(params)
 		card = fetch_a_card(params[:name].capitalize)
-		return display_error_message("Card not fount") unless card
+		return display_invalid_user_message(params[:name]) unless card
 		card.credit(params[:amount])
 	end
 
 	def charge_a_card(params)
 		return display_error_message(params) unless correct_length(params)
 		card = fetch_a_card(params[:name].capitalize)
-		return display_error_message("Card not fount") unless card
+		return display_invalid_user_message(params[:name]) unless card
 		card.charge(params[:amount])
 	end
 
@@ -95,7 +95,11 @@ class ApplicationUserInterface
 		puts welcome_message
 	end
 
-	#See my readme for an explination
+	def display_invalid_user_message(user_name)
+		puts invalid_user_message(user_name)
+	end
+
+	#See my readme for an explination for this method
 	def finished
 	end
 

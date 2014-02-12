@@ -13,12 +13,15 @@ at this point I made a cipher module, but didn't implement it
 
 then I went to the ui
 
+A note about testing private methods -- yeah i know that this is typically frowned upon -- in this context I decided to test every line of code, since the application_user_interface class only has one method that is public and it would have been impossible to test the other methods otherwise. but I wanted to be extra sure.... some private methods, such as the session driver method absolutley needed to be tested. This being financial software I wanted to be sure everything worked correctly.
+
 a lot of testing, using rspec, and when things were unclear as to how to tests - say stin/stout
 
 I took a tdd approach to the code
 
 If we get further in this process I know you guys are going to ask me to extend the code, so I took advantage of modules, and orginized my files in a way that will hopefully make it easy to add new features and functionality
 
+Usually I would not test private methods, I would do tests that 
 
 # The biggest challenge of writing this software was using a TDD approach
 # In conjunction with Designing the ApplicationInterface class's 'run' method.

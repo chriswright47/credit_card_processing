@@ -102,32 +102,29 @@ describe CreditCard do
 		end
 	end
 
-	context "Private Methods" do
+	context "correct_params" do
 
-		context "correct_params" do
-
-			it "should return true if name, number and limit attributes are present" do
-				jamie_card = CreditCard.new({:name => "Jamie", :number => 37478886310005, :limit => "$1"})
-				(jamie_card.send :correct_params).should eq true
-			end
+		it "should return true if name, number and limit attributes are present" do
+			jamie_card = CreditCard.new({:name => "Jamie", :number => 37478886310005, :limit => "$1"})
+			(jamie_card.send :correct_params).should eq true
 		end
-
-		context "format_ammount" do
-
-			it "should require that the limit start with a dollar sign and be followed by a valid number" do
-				expect { CreditCard.new({:name => "Bobby", :number => 374788863, :limit => "*12345"}) }.to raise_error
-				expect { CreditCard.new({:name => "Robby", :number => 78834534863, :limit => "$$12345"}) }.to raise_error
-				expect { CreditCard.new({:name => "Tony", :number => 374788863999000, :limit => "1$2345"}) }.to raise_error
-				expect { CreditCard.new({:name => "Jobs", :number => 63999000, :limit => "$02345"}) }.to raise_error
-			end
-
-			it "should convert the argument string into a number" do
-				heather_card = CreditCard.new({:name => "Heather", :number => 378282246310005, :limit => "$987654321"})
-				heather_card.limit.should eq 987654321
-			end
-		end
-		# valid_card? is just a wrapper method for the charge_card method in the Luhn10 Module
-		# and I felt that testing it again here again would be a bit redundant since we already
-		# test both the valid attribute and the method itself extensively 
 	end
+
+	context "format_ammount" do
+
+		it "should require that the limit start with a dollar sign and be followed by a valid number" do
+			expect { CreditCard.new({:name => "Bobby", :number => 374788863, :limit => "*12345"}) }.to raise_error
+			expect { CreditCard.new({:name => "Robby", :number => 78834534863, :limit => "$$12345"}) }.to raise_error
+			expect { CreditCard.new({:name => "Tony", :number => 374788863999000, :limit => "1$2345"}) }.to raise_error
+			expect { CreditCard.new({:name => "Jobs", :number => 63999000, :limit => "$02345"}) }.to raise_error
+		end
+
+		it "should convert the argument string into a number" do
+			heather_card = CreditCard.new({:name => "Heather", :number => 378282246310005, :limit => "$987654321"})
+			heather_card.limit.should eq 987654321
+		end
+	end
+	# valid_card? is just a wrapper method for the charge_card method in the Luhn10 Module
+	# and I felt that testing it again here again would be a bit redundant since we already
+	# test both the valid attribute and the method itself extensively 
 end

@@ -49,3 +49,5 @@ INVALID_USER_PROMPTS = ["salted pork",
 												"the empire strikes back",
 												"blake griffin vs justin bieber"
 												]
+
+TEST_NOT_FOUND_INFO = "User tom does not exist. You must create a card for them first\n"
