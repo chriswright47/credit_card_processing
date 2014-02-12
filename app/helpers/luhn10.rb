@@ -1,3 +1,5 @@
+# This module includes the check_card method used for validating valid credit cards
+
 module Luhn10
 	def check_card(number)
 		# Preventing bad inputs

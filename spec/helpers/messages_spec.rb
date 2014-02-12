@@ -36,5 +36,12 @@ describe Messages do
 		it "should return a string which says a user does not exist" do
 			invalid_user_message("tom").should eq TEST_NOT_FOUND_INFO
 		end
+	end	
+
+	context "user_already_exists_message" do
+
+		it "should return a string which says a user does not exist" do
+			user_already_exists_message("Tom").should eq TEST_ALREADY_EXISTS_INFO
+		end
 	end
 end

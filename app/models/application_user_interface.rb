@@ -1,3 +1,5 @@
+#This is the class that is in charge or running the application
+
 class ApplicationUserInterface
 
 	# this module contains all the raw messages to be displayed by the run method
@@ -76,7 +78,7 @@ class ApplicationUserInterface
 	end
 
 	def user_warning(user_name)
-		puts invalid_user_message(user_name)
+		puts user_already_exists_message(user_name)
 	end
 
 	def correct_length(params)
@@ -108,7 +110,7 @@ class ApplicationUserInterface
 	end
 
 	def command_prompt
-		print ">"
+		print "Enter a command:"
 		gets.chomp
 	end
 

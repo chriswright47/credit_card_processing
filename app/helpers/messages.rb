@@ -21,7 +21,7 @@ module Messages
 
 	def error_message(command)
 		<<-String
-		Sorry, but #{command} is not a valid prompt.
+		Sorry, but that is not a valid prompt: '#{command}'
 
 		Please enter a valid command or type HELP to see a list of command options.
 
@@ -39,5 +39,9 @@ module Messages
 
 	def invalid_user_message(user_name)
 		"User #{user_name} does not exist. You must create a card for them first\n"
+	end
+
+	def user_already_exists_message(user_name)
+		"Sorry, but a user with the name of '#{user_name}' already exists. For now all users must have unique names\n"
 	end
 end

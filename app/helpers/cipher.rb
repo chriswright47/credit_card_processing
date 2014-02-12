@@ -1,3 +1,7 @@
+# This module is used to encrypt user information
+
+require 'gibberish'
+
 module Cipher
 
 	CIPHER = Gibberish::AES.new("Braintree")

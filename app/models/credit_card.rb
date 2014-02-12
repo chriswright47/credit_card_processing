@@ -1,3 +1,5 @@
+# This is the credit card class which models credit card objects
+
 class CreditCard
 
 	include Luhn10

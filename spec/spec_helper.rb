@@ -1,4 +1,4 @@
-require_relative '../config/application.rb'
+require_relative '../config/application'
 
 # Setting up/formatting Rspec with a few optional paramaters
 # So that we can effectively run our tests

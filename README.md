@@ -54,18 +54,19 @@ Usually I would not test private methods, I would do tests that
 # At first I just stubbed out the command_prompt method with the corresponding
 # Keywords - i.e. interface.stub(:command_prompt) {"help"} but this led to an infinite
 # Loop which Rspec got stuck in. I then tried using threads to contain the run method
-# i.e. - thread = Thread.new do
-# interface.run.should.eq WELCOME_MESSAGE
-# end
-# thread.kill
+# i.e:
+	# thread = Thread.new do
+	# interface.run.should.eq WELCOME_MESSAGE
+	# end
+	# thread.kill
 # But this did not work since the contents of the block would not actually run.
 # I then tried to take the contents of the thread block and add it to a variable in the
 # Scope of the Rspec test itself, which works great in irb, but not in rspec:
-# tmp =""
-# thread = Thread.new do
-# tmp+= interface.run # I was going to have this return a string
-# end
-# thread.kill
+	# tmp =""
+	# thread = Thread.new do
+	# tmp+= interface.run # I was going to have this return a string
+	# end
+	# thread.kill
 # I could not get tmp to update inside of the context of the thread block for some reason.
 # At this point I considered revising the run method itself to make it more testable.
 # I weighed the pros and cons of not having an infinite loop or adding functionality
@@ -79,3 +80,11 @@ Usually I would not test private methods, I would do tests that
 
 
 I tried to write this in a very modular way, which is why there are redundant raise exception ... and checks in the runtime utils module. So that the credit card class could be used elsewhere if you wanted to.
+
+
+lastly when everything else was done I created the app.rb file so that the application could run, and then did some actual human testing ... which was helpful becaues it allowed me to improve the ui for a human
+
+and very last I took a list at the extra feature list
+
+one was packagin it as a gem
+the other was encrypting all of the data

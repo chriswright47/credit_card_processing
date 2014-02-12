@@ -53,6 +53,7 @@ TEST_CREDITS = ["credit Warren $20",
 								"credit david $188",
 								"credit Bea323triz $50"
 							 ]
+							 
 INVALID_USER_PROMPTS = ["salted pork",
 												"the empire strikes back",
 												"blake griffin vs justin bieber"
@@ -60,7 +61,9 @@ INVALID_USER_PROMPTS = ["salted pork",
 
 TEST_NOT_FOUND_INFO = "User tom does not exist. You must create a card for them first\n"
 
-BAD_AMOUNT = "Limits and charge ammounts must start with a '$' sign and be followed by a valid number"
+TEST_ALREADY_EXISTS_INFO = 	"Sorry, but a user with the name of 'Tom' already exists. For now all users must have unique names\n"
+
+BAD_AMOUNT = "Limits and charge ammounts must start with a '$' sign and be followed by a valid whole number."
 
 NAN = "That is not a valid number"
 

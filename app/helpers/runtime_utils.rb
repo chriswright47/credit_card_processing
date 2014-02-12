@@ -1,3 +1,8 @@
+# As the name implies, this module contains various methods which help
+# parse and format user inputs during the run time of the application.
+# The methods can also be used by different classes for things like 
+# checking to see if credit card limits/charges are valid
+
 module RuntimeUtils
 
 	CARD_CREATION_INFO = [:name, :number, :limit]
@@ -51,7 +56,7 @@ module RuntimeUtils
 	# if everything is kosher, we return the correctly formatted info
 	def check_validity(formatted_info)
 		unless is_limit_valid?(formatted_info.values.last) 
-			return "Limits and charge ammounts must start with a '$' sign and be followed by a valid number"
+			return "Limits and charge ammounts must start with a '$' sign and be followed by a valid whole number."
 		end
 		if is_this_add_card_info?(formatted_info)
 			if invalid_number?(formatted_info[:number])
