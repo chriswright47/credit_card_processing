@@ -1,3 +1,5 @@
+# This is various test information that the specs use. This information is also tested
+
 TEST_COMMAND_LINE_PROMPTS = {
 
 	"ADD wesley 4012888888881881 $10000" => {:name => "Wesley", :number => "4012888888881881", :limit => "$10000"},

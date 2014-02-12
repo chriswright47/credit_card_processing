@@ -6,7 +6,7 @@ module RuntimeUtils
 
 	def parse(command_line_info)
 		info = command_line_info.split(" ")
-		return command_line_info if info.length > 4 || info.length < 3 # Return immediately if the command was invalid
+		return command_line_info if too_big_or_small(info) # Return immediately if the command was invalid
 		formatted_info = format_info(info) # associate the correct keys with the command_line_info
 		check_validity(formatted_info)
 	end
@@ -14,7 +14,7 @@ module RuntimeUtils
 	def format_info(split_info)
 		parsed_info = shift_and_capitalize(split_info)
 		formatted_hash = Hash.new
-		if parsed_info.length == 3 # that is, if command_prompt started with'add'
+		if check_length(parsed_info) # that is, if command_prompt started with'add'
 			CARD_CREATION_INFO.each do |element|
 				formatted_hash[element] = parsed_info.shift
 			end
@@ -30,7 +30,7 @@ module RuntimeUtils
 		unless is_limit_valid?(formatted_info.values.last) # both limit and amount need to be in the correct format
 			return "Limits and charge ammounts must start with a '$' sign and be followed by a valid number"
 		end
-		if formatted_info.length == 3 #the card number needs to be an actual number
+		if check_length(formatted_info) #the card number needs to be an actual number
 			return "That is not a valid number" if formatted_info[:number].to_i == 0
 		end
 		formatted_info # if everything is kosher we return the correctly formatted info
@@ -45,4 +45,13 @@ module RuntimeUtils
 		parsed_info.first.capitalize! # Important name formatting so we dont have duplicate users
 		parsed_info
 	end
+
+	def check_length(parsed_info)
+		parsed_info.length == 3
+	end
+
+	def too_big_or_small(info)
+		info.length > 4 || info.length < 3
+	end
+
 end

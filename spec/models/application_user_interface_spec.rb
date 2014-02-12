@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe ApplicationUserInterface do
+	
 	before do
 		@interface = ApplicationUserInterface.new(CreditCard)
 	end
