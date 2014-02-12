@@ -23,4 +23,19 @@ describe RuntimeUtils do
 			end
 		end
 	end
+
+	context "format_info" do
+		it "should return the correcty formatted information for creating new cards and charging/crediting them" do
+			SPLIT_TEST_COMMAND_LINE_PROMPTS.each_pair do |key, value|
+			format_info(key).should eq value
+			end
+		end
+	end
+
+	context "check_validity" do
+
+		it "should" do
+
+		end
+	end
 end
