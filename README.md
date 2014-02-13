@@ -1,13 +1,17 @@
+#Disclaimer
+
+- For some reason the code on github has 4 spaces for every indents. I am not quite sure why this is since my local machine looks fine... I use 2 spaces when I write code.
+
 #The Basics
 
--Running the application:
+- Running the application:
 1. bundle
 2. from root run ‘ruby app.rb’ to run the application
 3. run ‘rake spec’ to run the specs (This app has 110 percent test coverage)
 
 #Why I Picked Ruby
 
-Ruby is the language I know best and I really like its style, flexibility, and ‘magic’. I love writing in Ruby.
+- Ruby is the language I know best and I really like its style, flexibility, and ‘magic’. I love writing in Ruby.
 
 #Project Overview
 
@@ -83,6 +87,5 @@ When everything was done with that I went ahead and looked at my list of extra f
 
 While both of these are important, I’ve got to get back to my other projects so they will have to be tabled for now.
 
-Best,
-Tyson 
+Best -- Tyson Kunovsky
 
