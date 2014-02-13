@@ -1,35 +1,31 @@
-Took a TDD approach to this, discovering new things along the way. Encryption, decided to not use factory girl because in this situation it wouldent really help that much since I wanted a lot of controll over ... and would have to manually enter the credit card numbers and limits myself anyways
+#The Basics
 
-I read the instructions twice, went and looked up all of the relevant info about things I still didnt know
+-Running the application:
+1. bundle
+2. from root run ‘ruby app.rb’ to run the application
+3. run ‘rake spec’ to run the specs (This app has 110 percent test coverage)
 
-Started with orginizing my file layout with the necessary folders I would need
+#Why I Picked Ruby
 
-Started with the luhn10. I went and implemented couple different variations myself, then I went and
-did research online as to...
+Ruby is the language I know best and I really like its style, flexibility, and ‘magic’. I love writing in Ruby.
 
-from the luhn10 I went on to the actually credit_card class itsself
+#Project Overview
 
-at this point I made a cipher module, but didn't implement it
+With this project I took a pure TDD approach (using Rspec) and discovered many new things along the way. I started the project by reading the instructions you sent me twice, and then went and looked up all of the relevant info about things I still didn’t know – i.e. like what the Luhn10 algorithm was.
 
-then I went to the ui
+Once I had a pretty good grasp of what you wanted and the best way to go about it, I spend some time drawing up the design of the app – classes, responsibilities, testing strategies, etc. –and then got to work organizing my folder layout with the necessary folder and files I would need. 
 
-A note about testing private methods -- yeah i know that this is typically frowned upon -- in this context I decided to test every line of code, since the application_user_interface class only has one method that is public and it would have been impossible to test the other methods otherwise. but I wanted to be extra sure.... some private methods, such as the session driver method absolutley needed to be tested. This being financial software I wanted to be sure everything worked correctly.
+When all the setup was finished I decided to start with the luhn10 algo. I went and implemented couple different variations myself, then I went and did some research online to see if I could find a more efficient solution. I settled on a hybrid of my solution and another one I thought was clever.
 
-a lot of testing, using rspec, and when things were unclear as to how to tests - say stin/stout
+After writing the tests and the algo for the Luhn10, I moved on to the tests for the CreditCard class. At this point I realized that all the information we are storing in the session should be encrypted, so I went ahead and made a Cipher module. Rather then letting feature creep get the best of me, I decided to wait off until everything was done to encrypt the data.
 
-I took a tdd approach to the code
+In my tests for the CreditCard class I made the decision to not use FactoryGirl because it would not be a good fit for the nature of my tests – every credit card should be different in different situations. I ended up making up my own test data factories when needed instead.
 
-when I got stuck with an error i did not understand ... such as the capatialize!, or number to_i not equaling 0 I would copy my work over to another file and test there
+After the CreditCard class was done I moved on the ApplicationInterface class and built out the UI. I built out a couple other modules I needed at this time – RuntimeUtils & Messages – really put a focus on keeping everything nice and modular. I know you guys are going to ask me to extend the code in some way and architecting my code like this will hopefully make it easy to add new features and functionality.
 
-If we get further in this process I know you guys are going to ask me to extend the code, so I took advantage of modules, and orginized my files in a way that will hopefully make it easy to add new features and functionality
+A note about testing private methods -- yeah I know that this is typically frowned upon – but in this context I decided to test every line of code, since the ApplicationInterface class only has one method that is/should be public and it would have been impossible to test all the private methods otherwise. Also, since this is financial software I wanted to be extra sure that everything worked correctly.
 
-Usually I would not test private methods, I would do tests that 
-
-# The biggest challenge of writing this software was using a TDD approach
-# In conjunction with Designing the ApplicationInterface class's 'run' method.
-# This is a tricky method to test since it runs an an infinite loop, which does not 
-# Play nicely with Rspec. I worked on testing this method for quite some time.
-# Here is the simple original method:
+The biggest challenge of writing this software was using TDD in conjunction with designing the ApplicationInterface class's 'run' method. This is a tricky method to test since it runs as an infinite loop, which does not play nicely with Rspec. I worked on testing this method for quite some time. Here is the original method:
 
 	# def run 
 	# 	display_valid_commands
@@ -51,40 +47,42 @@ Usually I would not test private methods, I would do tests that
 	# 	display_session_summary
 	# end
 
-# At first I just stubbed out the command_prompt method with the corresponding
-# Keywords - i.e. interface.stub(:command_prompt) {"help"} but this led to an infinite
-# Loop which Rspec got stuck in. I then tried using threads to contain the run method
-# i.e:
+At first I just stubbed out the command_prompt method with the corresponding
+keywords  I wanted to test- i.e. interface.stub(:command_prompt) {"help"} - but this led to an infinite loop which Rspec got stuck in. I then tried using threads to contain the run method i.e:
+
 	# thread = Thread.new do
 	# interface.run.should.eq WELCOME_MESSAGE
 	# end
 	# thread.kill
-# But this did not work since the contents of the block would not actually run.
-# I then tried to take the contents of the thread block and add it to a variable in the
-# Scope of the Rspec test itself, which works great in irb, but not in rspec:
+
+But this did not work since the contents of the block would not actually run in Rspec. I then tried to take the contents of the thread’s block and add it to a variable in the scope of the Rspec test itself, which works great in irb, but not in rspec:
 	# tmp =""
 	# thread = Thread.new do
 	# tmp+= interface.run # I was going to have this return a string
 	# end
 	# thread.kill
-# I could not get tmp to update inside of the context of the thread block for some reason.
-# At this point I considered revising the run method itself to make it more testable.
-# I weighed the pros and cons of not having an infinite loop or adding functionality
-# To the method that would allow me to make it more testable, but increase the
-# Complexity of the method. I really wanted to stick to my TDD approach so I decided
-# To refactor the method to work with Rspec at the cost of having another line of code:
+
+I could not get tmp to update inside of the context of the thread block for some reason…
+
+ At this point I considered revising the run method itself to make it more testable.
+I weighed the pros and cons of not having an infinite loop and or adding functionality to the method that would allow me to make it more testable, but potentially increase the complexity of the method. I really wanted to stick to TDD and test everything so I decided to refactor the method to work with Rspec at the cost of having another line of code:
+
 	# break if finished
-# And an extra empty method that I could stub out to be true using Rspec:
+
+And an extra empty method that I could stub out to be true using Rspec, which would break out of the loop:
+
 	# def finished
 	# end
 
+When everything was done with the ApplicationInterface class I went back and refactored the RuntimeUtils module to be cleaner and have better public interfaces. When that was done I went ahead and created the app.rb file and ran the code for the first time. It worked as expected, but I decided to change around two of the error messages to be a little bit clearer. Actual human testing is just important as Rspec/Integration testing so I made sure to test out every possible situation by hand.
 
-I tried to write this in a very modular way, which is why there are redundant raise exception ... and checks in the runtime utils module. So that the credit card class could be used elsewhere if you wanted to.
+When everything was done with that I went ahead and looked at my list of extra features I wanted:
 
+1. Package it as a gem for you
+2. Encrypt the data using a gem like gibberish 
 
-lastly when everything else was done I created the app.rb file so that the application could run, and then did some actual human testing ... which was helpful becaues it allowed me to improve the ui for a human
+While both of these are important, I’ve got to get back to my other projects so they will have to be tabled for now.
 
-and very last I took a list at the extra feature list
+Best,
+Tyson 
 
-one was packagin it as a gem
-the other was encrypting all of the data
