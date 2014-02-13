@@ -1,6 +1,6 @@
 #Disclaimer
 
-- For some reason the code on github has 4 spaces for every indents. I am not quite sure why this is since my local machine looks fine... I use 2 spaces when I write code.
+- For some reason the code on github has 4 spaces for every indent. I am not quite sure why this is since my local machine looks fine with 2 spaces -- Just know that I did not do that on purpose.
 
 #The Basics
 
