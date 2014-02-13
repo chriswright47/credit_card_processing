@@ -1,4 +1,6 @@
 # This module will be used to encrypt user information so that no plain text exists.
+# Dont have time to do it now though.
+
 require 'gibberish'
 
 module Cipher
