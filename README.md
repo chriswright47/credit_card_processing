@@ -1,8 +1,4 @@
-#Disclaimer
-
-- For some reason the code on github has 4 spaces for every indent. I am not quite sure why this is since my local machine looks fine with 2 spaces -- Just know that I did not do that on purpose.
-
-#The Basics
+#Running the app
 
 - Running the application:
 1. clone the repo
@@ -86,5 +82,5 @@ When everything was done with that I went ahead and looked at my list of extra f
 1. Package it as a gem for you
 2. Encrypt the data using a gem like gibberish 
 
-While both of these are important, I’ve got to get back to my other projects so they will have to be tabled for now.
+
 
