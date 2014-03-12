@@ -82,5 +82,5 @@ When everything was done with that I went ahead and looked at my list of extra f
 1. Package it as a gem for you
 2. Encrypt the data using a gem like gibberish 
 
-
+These are on my to do list for version 2.0 since I am a little pressed for time right now with other projects
 
