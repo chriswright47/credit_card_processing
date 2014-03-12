@@ -15,8 +15,8 @@ module Luhn10
 		number_string = ""
 		reversed_number_array = number.to_s.split("").reverse
 		reversed_number_array.each_with_index do |number, index|
-			number_string<< number if index%2 == 0
-			number_string<< (number.to_i*2).to_s if index%2==1
+			number_string << number if index%2 == 0
+			number_string << (number.to_i*2).to_s if index%2==1
 		end
 		number_string.split("").reduce(0) {|sum,num| sum+num.to_i}%10==0
 	end
