@@ -88,5 +88,3 @@ When everything was done with that I went ahead and looked at my list of extra f
 
 While both of these are important, I’ve got to get back to my other projects so they will have to be tabled for now.
 
-Best -- Tyson Kunovsky
-
