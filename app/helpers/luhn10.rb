@@ -1,11 +1,10 @@
 # This module includes the check_card method used for validating valid credit cards
 
-# This algorythem works as follows:
+# This algorithm works as follows:
 # As per the specifications we need to let the user know they entered bad inputs
-# i.e. if the input number is not a number or if the number is greater than 19 digits.
-# We then convert the 
-# Convert number to an array of reversed strings
-# Add each odd index number and each even index number*2 to our number_string
+# i.e. if the input number is NAN or if the number is greater than 19 digits.
+# We then convert the number to an array of reversed strings
+# We add each odd index number and each even index number*2 to our number_string
 # We split the string, reduce it by summing each number with the previous number,
 # And check to see if the result mod 10 is equal to 0 is true
 
