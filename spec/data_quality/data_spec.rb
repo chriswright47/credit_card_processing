@@ -2,8 +2,6 @@
 # Changed. This spec tests all of our test data and is a failsafe for data integrity.
 require 'spec_helper'
 
-# note that it is necessary to have the constants as strings
-# here in order to avoid conflict with the other tests
 
 describe "CC_NUMBERS" do
 
