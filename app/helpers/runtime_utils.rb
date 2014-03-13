@@ -1,6 +1,6 @@
 # As the name implies, this module contains various methods which help
 # parse and format user inputs during the run time of the application.
-# The methods can also be used by different classes for things like 
+# The methods can also be used by different classes for things like
 # checking to see if credit card limits/charges are valid
 
 module RuntimeUtils
@@ -30,14 +30,17 @@ module RuntimeUtils
 				formatted_hash[element] = parsed_info.shift
 			end
 		end
-		formatted_hash 
+		formatted_hash
 	end
 
 
 	def check_validity(formatted_info)
-		unless is_limit_valid?(formatted_info.values.last) 
+		unless is_limit_valid?(formatted_info.values.last)
 			return "Limits and charge ammounts must start with a '$' sign and be followed by a valid whole number."
 		end
+		# this next conditional branch does not seem right,
+		# I don't have enough context to know for sure, but
+		# I would double check this
 		if is_this_add_card_info?(formatted_info)
 			if invalid_number?(formatted_info[:number])
 				return "That is not a valid number or it is more than 19 digits"
@@ -58,8 +61,8 @@ module RuntimeUtils
 
 
 	def shift_and_capitalize(parsed_info)
-		parsed_info.shift 
-		parsed_info.first.capitalize! 
+		parsed_info.shift
+		parsed_info.first.capitalize!
 		parsed_info
 	end
 

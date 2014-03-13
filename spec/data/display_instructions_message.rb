@@ -1,16 +1,16 @@
 # I will be using this info in some of the specs I am writing to ensure
 # the messages being displayed does not accidentally get changed somehow.
 
-WELCOME_MESSAGE = <<-String
+WELCOME_MESSAGE =		<<-String
 
 		 Welcome to Braintree Jr.
 
 		 You can choose from the following commands:
-		
+
 		 To create a new credit card use the following format: Add Tom 4111111111111111 $1000
 		 To charge an existing credit card use the following format: Charge Tom $500
 		 To credit an existing credit card use the following format: Credit Tom $500
-		
+
 		 When you are ready to see a summary of all inputs type 'done'
 		 To display these commands again, type 'help'
 

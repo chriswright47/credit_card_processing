@@ -14,7 +14,7 @@ class CreditCard
 	def initialize(params)
 		@name = params.fetch(:name,nil)
 		@number = params.fetch(:number,nil)
-		@limit = format_amount(params.fetch(:limit))
+		@limit = format_amount(params.fetch(:limit,nil))
 		@balance  = valid ? 0 : "error"
 		raise ArgumentError.new("Must be initialized with a name, number and limit") unless correct_params
 	end
