@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ApplicationUserInterface do
-	
+
 	before do
 		@interface = ApplicationUserInterface.new(CreditCard)
 	end
@@ -19,7 +19,7 @@ describe ApplicationUserInterface do
 
 	context "Initialization" do
 
-		it "should be initialized with a credit card" do 
+		it "should be initialized with a credit card" do
 			expect { ApplicationUserInterface.new(CreditCard) }.not_to raise_error
 			ApplicationUserInterface.new(CreditCard).credit_card.class.should eq Class
 		end
@@ -51,7 +51,7 @@ describe ApplicationUserInterface do
 				@interface.run.should eq WELCOME_MESSAGE
 			end
 
-			it "should print out all the user's credit card info and ballances if the user enters 'done'" do
+			it "should print out all the user's credit card info and balances if the user enters 'done'" do
 				@interface.stub(:command_prompt) {"done"}
 				@interface.stub(:display_session_summary) {TEST_FORMATTED_SESSION_INFO}
 				@interface.run.should eq TEST_FORMATTED_SESSION_INFO
@@ -87,7 +87,7 @@ describe ApplicationUserInterface do
 				@interface.session_information.length.should eq 6
 			end
 
-			it "should update the ballance of an existing card with a new charge if the first word is charge" do
+			it "should update the balance of an existing card with a new charge if the first word is charge" do
 				VALID_ADD_PROMPTS.each do |prompt|
 					@interface.stub(:command_prompt) {prompt}
 					@interface.stub(:finished) {true}
@@ -98,12 +98,12 @@ describe ApplicationUserInterface do
 					@interface.stub(:finished) {true}
 					@interface.run
 				end
-				@interface.session_information[0].ballance.should eq 55
-				@interface.session_information[1].ballance.should eq 1
-				@interface.session_information[2].ballance.should eq 2000
-				@interface.session_information[3].ballance.should eq 94
-				@interface.session_information[4].ballance.should eq "error"
-				@interface.session_information[5].ballance.should eq 0
+				@interface.session_information[0].balance.should eq 55
+				@interface.session_information[1].balance.should eq 1
+				@interface.session_information[2].balance.should eq 2000
+				@interface.session_information[3].balance.should eq 94
+				@interface.session_information[4].balance.should eq "error"
+				@interface.session_information[5].balance.should eq 0
 			end
 
 			it "should return an error message if you try to charge a card that does not exist" do
@@ -124,7 +124,7 @@ describe ApplicationUserInterface do
 				@interface.session_information.should eq []
 			end
 
-			it "should update the ballance of an existing card with a new credit if the first word is credit" do
+			it "should update the balance of an existing card with a new credit if the first word is credit" do
 				VALID_ADD_PROMPTS.each do |prompt|
 					@interface.stub(:command_prompt) {prompt}
 					@interface.stub(:finished) {true}
@@ -135,12 +135,12 @@ describe ApplicationUserInterface do
 					@interface.stub(:finished) {true}
 					@interface.run
 				end
-				@interface.session_information[0].ballance.should eq -110
-				@interface.session_information[1].ballance.should eq -2
-				@interface.session_information[2].ballance.should eq -4000
-				@interface.session_information[3].ballance.should eq -188
-				@interface.session_information[4].ballance.should eq "error"
-				@interface.session_information[5].ballance.should eq -20
+				@interface.session_information[0].balance.should eq -110
+				@interface.session_information[1].balance.should eq -2
+				@interface.session_information[2].balance.should eq -4000
+				@interface.session_information[3].balance.should eq -188
+				@interface.session_information[4].balance.should eq "error"
+				@interface.session_information[5].balance.should eq -20
 			end
 
 			it "should let the user know that the command they entered is not a valid input if that is the case" do
@@ -203,7 +203,7 @@ describe ApplicationUserInterface do
 					@interface.run
 				end
 				@interface.send(:fetch_a_card, "Wesley").name.should eq "Wesley"
-				@interface.send(:fetch_a_card, "David").ballance.should eq 0
+				@interface.send(:fetch_a_card, "David").balance.should eq 0
 				@interface.send(:fetch_a_card, "Horatio").should eq nil
 			end
 		end
@@ -225,7 +225,7 @@ describe ApplicationUserInterface do
 				@interface.stub(:finished) {true}
 				@interface.run
 				@interface.send(:credit_a_card, {name: "Sarah", amount: "$1000"})
-				@interface.session_information[0].ballance.should eq -1000
+				@interface.session_information[0].balance.should eq -1000
 			end
 		end
 
@@ -246,12 +246,12 @@ describe ApplicationUserInterface do
 				@interface.stub(:finished) {true}
 				@interface.run
 				@interface.send(:charge_a_card, {name: "William", amount: "$1000"})
-				@interface.session_information[0].ballance.should eq 1000
+				@interface.session_information[0].balance.should eq 1000
 			end
 		end
 
 		context "user_warning" do
-			
+
 			it "should display a warning to the user if there already exists a user of the same name" do
 				@interface.stub(:puts) {"This user already exists"}
 				@interface.send(:user_warning, "Leslie").should eq "This user already exists"
@@ -284,7 +284,7 @@ describe ApplicationUserInterface do
 		end
 
 		context "display_error_message" do
-			
+
 			it "should display an error message" do
 				@interface.stub(:puts) {"An error message"}
 				@interface.send(:display_error_message, "Error").should eq "An error message"

@@ -1,22 +1,21 @@
 # This is the credit card class which models credit card objects
 
 class CreditCard
-	# Luhn10 is the algorithm we are using to check to see if the card number is a valid card number 
+	# Luhn10 is the algorithm we are using to check to see if the card number is a valid card number
 	include Luhn10
 
 	# This is included so that we can use its is_limit_valid? method to check the format of a limit/charge
 	include RuntimeUtils
 
-	attr_accessor :ballance
+	attr_accessor :balance
 
-	attr_reader :name, :number, :limit, :valid
-	
+	attr_reader :name, :number, :limit
+
 	def initialize(params)
 		@name = params.fetch(:name,nil)
 		@number = params.fetch(:number,nil)
-		@valid = valid_card?(@number)
 		@limit = format_amount(params.fetch(:limit))
-		@valid ? @ballance = 0 : @ballance = "error"
+		@balance  = valid ? 0 : "error"
 		raise ArgumentError.new("Must be initialized with a name, number and limit") unless correct_params
 	end
 
@@ -25,7 +24,7 @@ class CreditCard
 		return unless self.valid
 		raise ArgumentError.new("Charges must be whole numbers") if amount=~/\./
 		dollar_ammount = format_amount(amount)
-		self.ballance+=dollar_ammount if self.ballance+dollar_ammount <= self.limit
+		self.balance+=dollar_ammount if self.balance+dollar_ammount <= self.limit
 	end
 
 
@@ -33,7 +32,11 @@ class CreditCard
 		return unless self.valid
 		raise ArgumentError.new("Credits must be whole numbers") if amount=~/\./
 		dollar_ammount = format_amount(amount)
-		self.ballance-=dollar_ammount
+		self.balance-=dollar_ammount
+	end
+
+	def valid
+		valid_card?(number)
 	end
 
 	private
@@ -55,5 +58,5 @@ class CreditCard
 		end
 		dollar_string[1..-1].to_i
 	end
-	
+
 end

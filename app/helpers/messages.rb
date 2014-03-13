@@ -8,11 +8,11 @@ module Messages
 		 Welcome to Braintree Jr.
 
 		 You can choose from the following commands:
-		
+
 		 To create a new credit card use the following format: Add Tom 4111111111111111 $1000
 		 To charge an existing credit card use the following format: Charge Tom $500
 		 To credit an existing credit card use the following format: Credit Tom $500
-		
+
 		 When you are ready to see a summary of all inputs type 'done'
 		 To display these commands again, type 'help'
 
@@ -32,7 +32,7 @@ module Messages
 	def session_summary_message(session_hash)
 		tmp_array =[]
 		session_hash.each do |element|
-			tmp_array << "#{element.name}: $#{element.ballance}\n"
+			tmp_array << "#{element.name}: $#{element.balance}\n"
 		end
 		tmp_array
 	end

@@ -22,14 +22,14 @@ describe CreditCard do
 			expect { CreditCard.new({:name => nil, :number => 101010101010101, :limit => "$4000"}) }.to raise_error
 		end
 
-		it "should be initialized with a ballance of 0 if it is a valid card" do 
+		it "should be initialized with a balance of 0 if it is a valid card" do
 			bryson_card = CreditCard.new({:name => "Bryson", :number => 38520000023237, :limit => "$8000"})
-			bryson_card.ballance.should eq 0
+			bryson_card.balance.should eq 0
 		end
 
-		it "should be initialized with a ballance value of 'error' if it is an invalid card" do 
+		it "should be initialized with a balance value of 'error' if it is an invalid card" do
 			jessica_card = CreditCard.new({:name => "Jessica", :number => 38523200423237, :limit => "$8340"})
-			jessica_card.ballance.should eq 'error'
+			jessica_card.balance.should eq 'error'
 		end
 
 		it "should check to see if the card number is a valid number" do
@@ -47,57 +47,57 @@ describe CreditCard do
 
 		context "charge" do
 
-			it "should not increase the ballance of an invalid card" do
+			it "should not increase the balance of an invalid card" do
 				brittnay_card = CreditCard.new({:name => "Brittnay", :number => 321482246318888, :limit => "$8000"})
 				brittnay_card.charge("$134")
 				brittnay_card.charge("$1000")
-				brittnay_card.ballance.should eq 'error'
+				brittnay_card.balance.should eq 'error'
 			end
 
 			# As per the initial input specs you gave, we can change this easily enough later on if we like
 			it "should not let you change a valid card an amount that is not a whole number" do
 				jessica_card = CreditCard.new({:name => "Jessica", :number => 5610591081018250, :limit => "$4333"})
 				expect { jessica_card.charge("$14.55") }.to raise_error
-				jessica_card.ballance.should eq 0
+				jessica_card.balance.should eq 0
 			end
 
-			it "should increase the ballance of a valid card by the amount indicated up to and including the limit" do
+			it "should increase the balance of a valid card by the amount indicated up to and including the limit" do
 				joelle_card = CreditCard.new({:name => "Joelle", :number => 5610591081018250, :limit => "$3333"})
 				joelle_card.charge("$3333")
-				joelle_card.ballance.should eq 3333
+				joelle_card.balance.should eq 3333
 			end
 
 			it "should not allow a valid card to be charged over the pre-established limit" do
 				paolo_card = CreditCard.new({:name => "Paolo", :number => 3530111333300000, :limit => "$2000"})
 				paolo_card.charge("$750")
-				paolo_card.ballance.should eq 750
+				paolo_card.balance.should eq 750
 				paolo_card.charge("$750")
-				paolo_card.ballance.should eq 1500
+				paolo_card.balance.should eq 1500
 				paolo_card.charge("$750")
-				paolo_card.ballance.should eq 1500
+				paolo_card.balance.should eq 1500
 			end
 		end
 
 		context "credit" do
 
-			it "should not decrease the ballance of an invalid card" do
+			it "should not decrease the balance of an invalid card" do
 				sophie_card = CreditCard.new({:name => "Sophie", :number => 4988457458457043, :limit => "$87943"})
 				sophie_card.credit("$100")
 				sophie_card.credit("3322")
-				sophie_card.ballance.should eq 'error'
+				sophie_card.balance.should eq 'error'
 			end
 
 			it "should not let you credit a valid card with an amount that is not a whole number" do
 				ian_card = CreditCard.new({:name => "Ian", :number => 4111111111111111, :limit => "$1212"})
 				expect { ian_card.credit("$413.55") }.to raise_error
-				ian_card.ballance.should eq 0
+				ian_card.balance.should eq 0
 			end
 
-			it "should decrease the ballance of a valid credit card by the indicated amount" do
+			it "should decrease the balance of a valid credit card by the indicated amount" do
 				mufasa_card = CreditCard.new({:name => "Mufasa", :number => 4111111111111111, :limit => "$1212"})
 				mufasa_card.credit("$10")
 				mufasa_card.credit("$4958")
-				mufasa_card.ballance.should eq -4968
+				mufasa_card.balance.should eq -4968
 			end
 		end
 	end

@@ -1,4 +1,4 @@
-# Because we have so much test data we need to ensure that the test data itself does not accidentally get 
+# Because we have so much test data we need to ensure that the test data itself does not accidentally get
 # Changed. This spec tests all of our test data and is a failsafe for data integrity.
 require 'spec_helper'
 
@@ -34,11 +34,11 @@ describe "WELCOME_MESSAGE" do
 		 Welcome to Braintree Jr.
 
 		 You can choose from the following commands:
-		
+
 		 To create a new credit card use the following format: Add Tom 4111111111111111 $1000
 		 To charge an existing credit card use the following format: Charge Tom $500
 		 To credit an existing credit card use the following format: Credit Tom $500
-		
+
 		 When you are ready to see a summary of all inputs type 'done'
 		 To display these commands again, type 'help'
 
@@ -66,7 +66,7 @@ end
 describe "TEST_SESSION_INFORMATION" do
 
 	it "should be equal to the following hash" do
-		TEST_SESSION_INFORMATION.should == [{:name =>"Andrew", :ballance => 33}, {:name =>"Joe", :ballance => 933}, {:name => "Tyson", :ballance => -400}]
+		TEST_SESSION_INFORMATION.should == [{:name =>"Andrew", :balance => 33}, {:name =>"Joe", :balance => 933}, {:name => "Tyson", :balance => -400}]
 	end
 end
 
@@ -85,7 +85,7 @@ describe "VALID_ADD_PROMPTS" do
 										 "add Nugen 5555555555554444 $55345",
 										 "aDD David 5555555555554444 $100",
 										 "Add bea323triz 83938475849302933 $6664",
-										 "adD warren 4012888888881881 $4000" 
+										 "adD warren 4012888888881881 $4000"
 										]
 	end
 end
@@ -98,7 +98,7 @@ describe "INVALID_ADD_PROMPTS" do
 										 "add Nugen 3949439848320 $55345 $3",
 										 "aDD 894503450293454545 $100",
 										 "Add $6664",
-										 "adD warren ewer4012888888881881 $4000", 
+										 "adD warren ewer4012888888881881 $4000",
 										 "add wilco 5555555555554444 $ 4000",
 										]
 	end
@@ -109,7 +109,7 @@ describe "TEST_CHARGES" do
 	it "should be equal to the following array" do
 		TEST_CHARGES.should == ["charge Warren $00",
 								"charge Wesley $55",
-								"charGe Jennifer $1",	
+								"charGe Jennifer $1",
 								"charge nugen $2000",
 								"charge david $94",
 								"charge Bea323triz $999999"
@@ -122,7 +122,7 @@ describe "TEST_CREDITS" do
 	it "should be equal to the following array" do
 		TEST_CREDITS.should == ["credit Warren $20",
 								"credit Wesley $110",
-								"credit Jennifer $2",	
+								"credit Jennifer $2",
 								"credit nugen $4000",
 								"credit david $188",
 								"credit Bea323triz $50"

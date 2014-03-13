@@ -17,7 +17,7 @@ SPLIT_TEST_COMMAND_LINE_PROMPTS = {["ADD", "wesley", "4012888888881881", "$10000
 
 VALID_NEW_CARD = { :name=> "Miley",:number =>"4433099586883995", :limit => "$5000"}
 
-TEST_SESSION_INFORMATION = [{:name =>"Andrew", :ballance => 33}, {:name =>"Joe", :ballance => 933}, {:name => "Tyson", :ballance => -400}]
+TEST_SESSION_INFORMATION = [{:name =>"Andrew", :balance => 33}, {:name =>"Joe", :balance => 933}, {:name => "Tyson", :balance => -400}]
 
 TEST_FORMATTED_SESSION_INFO = ["Andrew: $33\n", "Joe: $933\n", "Tyson: $-400\n"]
 
@@ -26,7 +26,7 @@ VALID_ADD_PROMPTS = ["ADD Wesley 4012888888881881 $10000",
 										 "add Nugen 5555555555554444 $55345",
 										 "aDD David 5555555555554444 $100",
 										 "Add bea323triz 83938475849302933 $6664",
-										 "adD warren 4012888888881881 $4000" 
+										 "adD warren 4012888888881881 $4000"
 										]
 
 INVALID_ADD_PROMPTS = ["ADD3 Wesley 4012888888881881 $10000",
@@ -34,13 +34,13 @@ INVALID_ADD_PROMPTS = ["ADD3 Wesley 4012888888881881 $10000",
 										 "add Nugen 3949439848320 $55345 $3",
 										 "aDD 894503450293454545 $100",
 										 "Add $6664",
-										 "adD warren ewer4012888888881881 $4000", 
+										 "adD warren ewer4012888888881881 $4000",
 										 "add wilco 5555555555554444 $ 4000",
 										]
 
 TEST_CHARGES = ["charge Warren $00",
 								"charge Wesley $55",
-								"charGe Jennifer $1",	
+								"charGe Jennifer $1",
 								"charge nugen $2000",
 								"charge david $94",
 								"charge Bea323triz $999999"
@@ -49,12 +49,12 @@ TEST_CHARGES = ["charge Warren $00",
 
 TEST_CREDITS = ["credit Warren $20",
 								"credit Wesley $110",
-								"credit Jennifer $2",	
+								"credit Jennifer $2",
 								"credit nugen $4000",
 								"credit david $188",
 								"credit Bea323triz $50"
 							 ]
-							 
+
 INVALID_USER_PROMPTS = ["salted pork",
 												"the empire strikes back",
 												"blake griffin vs justin bieber"

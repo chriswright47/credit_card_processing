@@ -22,7 +22,7 @@ describe Messages do
 
 		it "should return an array containing the session summary information" do
 			array_of_testing_ojects = []
-			Testing = Struct.new(:name, :ballance)
+			Testing = Struct.new(:name, :balance)
 			ty = Testing.new("tyson", 0)
 			bill = Testing.new("bill", 440)
 			array_of_testing_ojects << ty
@@ -36,7 +36,7 @@ describe Messages do
 		it "should return a string which says a user does not exist" do
 			invalid_user_message("tom").should eq TEST_NOT_FOUND_INFO
 		end
-	end	
+	end
 
 	context "user_already_exists_message" do
 
