@@ -20,11 +20,17 @@ class ApplicationUserInterface
 	end
 
 	private
-	
+
 	def session_driver
 		display_valid_commands
 		command = command_prompt
 		until command.downcase == "done"
+			# this conditional branch seems ugly
+			# if you can make the Card class itself responsible
+			# for responding to the command,
+			# e.g. Card.respond(command.downcase)
+			# and then have all logic of parsing / responding to command
+			# in Card class (no big deal as is, just not as O.O.)
 			if command.downcase == "help"
 				display_valid_commands
 			elsif command[0..3].downcase == "add "
@@ -33,7 +39,7 @@ class ApplicationUserInterface
 				credit_a_card(parse(command))
 			elsif command[0..6].downcase == "charge "
 				charge_a_card(parse(command))
-			else 
+			else
 				display_error_message(command)
 			end
 			break if finished # This was necessary for rspec testing
@@ -57,7 +63,7 @@ class ApplicationUserInterface
 		nil
 	end
 
-	
+
 	def credit_a_card(params)
 		return display_error_message(params) unless correct_length(params)
 		card = fetch_a_card(params[:name].capitalize)
