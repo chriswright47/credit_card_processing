@@ -40,7 +40,10 @@ module RuntimeUtils
 		end
 		# this next conditional branch does not seem right,
 		# I don't have enough context to know for sure, but
-		# I would double check this
+		# I would double check this, if it's right as is, you can say:
+		# if is_this_add_card_info?(formatted_info) && invalid_number?(formatted_info[:number])
+		#   return ...
+		# end
 		if is_this_add_card_info?(formatted_info)
 			if invalid_number?(formatted_info[:number])
 				return "That is not a valid number or it is more than 19 digits"
